@@ -1,0 +1,39 @@
+{
+  "name": "simtabi/larabell",
+  "description": "Sweetalert and Toaster notifications for Laravel livewire with support for tailwind and bootstrap",
+  "type": "library",
+  "require": {
+    "spatie/laravel-package-tools": "^1.4.3",
+    "illuminate/contracts": "^8.51"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^6.18"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Imani Manyara",
+      "email": "imani@simtabi.com",
+      "homepage": "https://simtabi.com",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Simtabi\\Bells\\": "src"
+    },
+    "files": [
+      "helpers/helpers.php"
+    ]
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Simtabi\\Larabell\\Core\\LarabellServiceProvider"
+      ],
+      "aliases": {
+
+      }
+    }
+  }
+}
