@@ -53,12 +53,12 @@ class FlashServiceProvider extends ServiceProvider
         $this->app->singleton(StorageManager::class, function (Application $app) {
             return new StorageManager($app);
         });
-        
+
         $this->app->bind(StorageContract::class, function (Application $app) {
             /** @var StorageManager $messagesStorageManager */
             $messagesStorageManager = $app->make(StorageManager::class);
 
-            return $messagesStorageManager->driver();
+            return $messagesStorageManager->getDefaultDriver();
         });
 
         $this->app->singleton(Larabell::getFlashFacadeName(), function (Application $app) {

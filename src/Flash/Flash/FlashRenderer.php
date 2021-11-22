@@ -4,7 +4,9 @@ namespace Simtabi\Larabell\Flash\Flash;
 
 use Simtabi\Larabell\Flash\Message\FlashMessage;
 use Simtabi\Larabell\Flash\Contracts\FlashMessageRendererContract;
+use Simtabi\Larabell\Flash\Contracts\FlashRendererContract;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
+use Simtabi\Larabell\Larabell;
 
 class FlashRenderer implements FlashRendererContract
 {
@@ -28,7 +30,7 @@ class FlashRenderer implements FlashRendererContract
 
     public function getSeparator()
     {
-        return $this->separator ?? $this->configRepository->get('laraflash.separator');
+        return $this->separator ?? $this->configRepository->get(Larabell::getConfig('flash.separator'));
     }
 
     public function render(Flash $laraflash): string

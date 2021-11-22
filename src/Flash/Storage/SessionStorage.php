@@ -4,6 +4,7 @@ namespace Simtabi\Larabell\Flash\Storage;
 
 use Illuminate\Contracts\Session\Session;
 use Simtabi\Larabell\Flash\Contracts\StorageContract;
+use Simtabi\Larabell\Larabell;
 
 class SessionStorage implements StorageContract
 {
@@ -23,7 +24,7 @@ class SessionStorage implements StorageContract
 
     public function getKey()
     {
-        return $this->key ?? 'flash_messages';
+        return $this->key ?? Larabell::getFlashStorageDriver();
     }
 
     public function get(): array
