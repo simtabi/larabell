@@ -300,7 +300,7 @@ trait ToastBuilder
      *
      * @return false|mixed
      */
-    public function fireToastFromValidationError($override = true)
+    public function fireValidationErrorsThroughToast($heading = null, $override = true)
     {
         $errorBag = $this->getErrorBag()->all();
         if (count($errorBag) > 0){
@@ -310,8 +310,12 @@ trait ToastBuilder
             }
             $html .= '</ul>';
 
+            if (!empty($heading)) {
+
+            }
+
             if ($override) {
-                $this->setToastHeading('Ooops!')->setToastIcon('error');
+                $this->setToastHeading((!empty($heading) ? $heading : 'Ooops!'))->setToastIcon('error');
             }
             return $this->setToastText($html)->fireToastNotification();
         }
@@ -326,7 +330,7 @@ trait ToastBuilder
      */
     public function fireToastNotification()
     {
-        return $this->emit('toast:fire', [
+        return $this->emit('larabellToast:fire', [
             'icon'               => $this->toastIcon,
             'text'               => $this->toastText,
             'position'           => $this->toastPosition,

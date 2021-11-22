@@ -1,5 +1,5 @@
-@larabellCss
-@larabellJs
+@larabellToastCss
+@larabellToastJs
 
 <script>
 
@@ -95,11 +95,11 @@
             return;
         }
 
-        Livewire.on('toast:fire', event => {
+        Livewire.on('larabellToast:fire', event => {
             return ToastNotification(event);
         });
 
-        Livewire.on('swal:fire', event => {
+        Livewire.on('larabellSwal:fire', event => {
             return SwalModal(event);
         });
 

@@ -661,7 +661,7 @@ trait SweetalertBuilder
      */
     public function fireSweetalertModal()
     {
-        return $this->emit('swal:fire', [
+        return $this->emit('larabellSwal:fire', [
             'icon'                   => $this->swalIcon,
             'text'                   => $this->swalText,
             'position'               => $this->swalPosition,

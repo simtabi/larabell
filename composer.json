@@ -19,7 +19,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "Simtabi\\Bells\\": "src"
+      "Simtabi\\Larabell\\": "src"
     },
     "files": [
       "helpers/helpers.php"

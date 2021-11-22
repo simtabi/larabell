@@ -10,9 +10,8 @@ use Illuminate\View\Compilers\BladeCompiler;
 class ToastServiceProvider extends ServiceProvider
 {
 
-    private   const        PACKAGE_PATH = __DIR__ . '/../../';
 
-    public    static array $cdnAssets   = [
+    public static array $cdnAssets = [
         'css'  => [
         ],
         'js' => [
@@ -20,7 +19,7 @@ class ToastServiceProvider extends ServiceProvider
         ],
     ];
 
-    public    static array $assets      = [
+    public static array $assets    = [
         'css'  => [
             'jquery.toast.css',
         ],
@@ -52,13 +51,13 @@ class ToastServiceProvider extends ServiceProvider
 
     private function registerDirectives()
     {
-        Blade::directive('bellsCss', function () {
+        Blade::directive('larabellToastCss', function () {
             $styles  = $this->getComponentCdnStyles();
             $styles .= $this->getComponentStyles();
             return $styles;
         });
 
-        Blade::directive('bellsJs', function () {
+        Blade::directive('larabellToastJs', function () {
             $scripts  = $this->getComponentCdnScripts();
             $scripts .= $this->getComponentScripts();
             return $scripts;
@@ -72,7 +71,7 @@ class ToastServiceProvider extends ServiceProvider
         if (is_array($styles) && (count($styles) >= 1)) {
 
             return collect($styles)->map(function($item) {
-                return asset("/vendor/bells/css/{$item}");
+                return asset("/vendor/larabell/css/{$item}");
             })->flatten()->map(function($styleUrl) {
                 return '<link media="all" type="text/css" rel="stylesheet" href="' . $styleUrl . '">';
             })->implode(PHP_EOL);
@@ -87,7 +86,7 @@ class ToastServiceProvider extends ServiceProvider
 
         if (is_array($scripts) && (count($scripts) >= 1)) {
             return collect($scripts)->map(function($item) {
-                return asset("/vendor/bells/js/{$item}");
+                return asset("/vendor/larabell/js/{$item}");
             })->flatten()->map(function($scriptUrl) {
                 return !empty($scriptUrl) ? '<script src="' . $scriptUrl . '"></script>' : '';
             })->implode(PHP_EOL);
