@@ -1,8 +1,9 @@
 <?php
 
-namespace Simtabi\Larabell\Flash\Flash;
+namespace Simtabi\Larabell\Flash\Contracts;
 
 use Illuminate\Http\Request;
+use Simtabi\Larabell\Flash\Flash\Flash;
 
 interface FlashPreparerContract
 {

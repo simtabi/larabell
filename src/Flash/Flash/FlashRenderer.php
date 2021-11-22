@@ -3,7 +3,7 @@
 namespace Simtabi\Larabell\Flash\Flash;
 
 use Simtabi\Larabell\Flash\Message\FlashMessage;
-use Simtabi\Larabell\Flash\Message\FlashMessageRendererContract as FlashMessageRenderer;
+use Simtabi\Larabell\Flash\Contracts\FlashMessageRendererContract;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 
 class FlashRenderer implements FlashRendererContract
@@ -14,7 +14,7 @@ class FlashRenderer implements FlashRendererContract
 
     protected $separator;
 
-    public function __construct(FlashMessageRenderer $flashMessageRenderer, ConfigRepository $configRepository)
+    public function __construct(FlashMessageRendererContract $flashMessageRenderer, ConfigRepository $configRepository)
     {
         $this->flashMessageRenderer = $flashMessageRenderer;
 

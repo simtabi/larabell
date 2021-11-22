@@ -3,6 +3,7 @@
 namespace Simtabi\Larabell\Flash\Message;
 
 use Simtabi\Larabell\Flash\Exceptions\SkinNotFoundException;
+use Simtabi\Larabell\Flash\Contracts\FlashMessageRendererContract;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Simtabi\Larabell\Flash\Message;
+namespace Simtabi\Larabell\Flash\Contracts;
 
 interface FlashMessageFactoryContract
 {

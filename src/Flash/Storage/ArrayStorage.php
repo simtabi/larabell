@@ -2,6 +2,8 @@
 
 namespace Simtabi\Larabell\Flash\Storage;
 
+use Simtabi\Larabell\Flash\Contracts\StorageContract;
+
 class ArrayStorage implements StorageContract
 {
     protected $messages = [];

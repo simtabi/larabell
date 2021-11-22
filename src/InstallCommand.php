@@ -11,7 +11,6 @@ class InstallCommand extends Command
 
     private const PATH = __DIR__ . '/../../';
 
-
     /**
      * The name and signature of the console command.
      *

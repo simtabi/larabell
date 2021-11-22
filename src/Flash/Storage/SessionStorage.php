@@ -3,6 +3,7 @@
 namespace Simtabi\Larabell\Flash\Storage;
 
 use Illuminate\Contracts\Session\Session;
+use Simtabi\Larabell\Flash\Contracts\StorageContract;
 
 class SessionStorage implements StorageContract
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Simtabi\Larabell\Flash\Storage;
+namespace Simtabi\Larabell\Flash\Contracts;
 
 interface StorageContract
 {
