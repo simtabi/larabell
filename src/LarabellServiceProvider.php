@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
 use Illuminate\Foundation\Application;
+use Simtabi\Larabell\Flash\Providers\FlashServiceProvider;
 
 class LarabellServiceProvider extends BaseServiceProvider
 {
@@ -58,6 +59,7 @@ class LarabellServiceProvider extends BaseServiceProvider
         $this->registerDirectives();
 
         $this->app->register(LarabellServiceProvider::class);
+        $this->app->register(FlashServiceProvider::class);
 
         /** @var Router $router */
         $router = $this->app['router'];
