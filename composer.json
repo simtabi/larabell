@@ -3,8 +3,7 @@
   "description": "Sweetalert and Toaster notifications for Laravel livewire with support for tailwind and bootstrap",
   "type": "library",
   "require": {
-    "spatie/laravel-package-tools": "^1.4.3",
-    "illuminate/contracts": "^8.51"
+
   },
   "require-dev": {
     "orchestra/testbench": "^6.18"
