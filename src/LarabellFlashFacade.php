@@ -1,9 +1,9 @@
 <?php
 
-namespace Simtabi\Larabell\Flash\Facades;
+namespace Simtabi\Larabell;
 
 use Illuminate\Support\Facades\Facade;
-use Simtabi\Larabell\LarabelHelper;
+use Simtabi\Larabell\Larabell;
 
 class LarabellFlashFacade extends Facade
 {
@@ -14,6 +14,6 @@ class LarabellFlashFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return LarabelHelper::getLarabellHelperFacadeName();
+        return Larabell::getLarabellFacadeName();
     }
 }

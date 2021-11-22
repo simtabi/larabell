@@ -15,7 +15,7 @@ class LarabellMiddleware
 
     public function __construct(FlashPreparerContract $flash)
     {
-        $this->larabell = Container::getInstance()->make(LarabelHelper::getFlashFacadeName());
+        $this->larabell = Container::getInstance()->make(Larabell::getFlashFacadeName());
         $this->flash    = $flash;
     }
 

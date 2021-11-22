@@ -10,14 +10,7 @@ use Illuminate\Foundation\Application;
 class LarabellServiceProvider extends BaseServiceProvider
 {
 
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected              $defer       = false;
-
-    private   const        PACKAGE_PATH = __DIR__ . '/../../';
+    private const PACKAGE_PATH = __DIR__ . '/../';
 
     /**
      * Get the services provided by the provider.
@@ -36,8 +29,8 @@ class LarabellServiceProvider extends BaseServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(LarabelHelper::getLarabellHelperFacadeName(), function (Application $app) {
-            return $app->make(LarabelHelper::class);
+        $this->app->singleton(Larabell::getLarabellFacadeName(), function (Application $app) {
+            return $app->make(Larabell::class);
         });
     }
 

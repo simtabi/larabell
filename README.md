@@ -101,3 +101,5 @@ Refer to the documentation online at: [https://github.com/kamranahmedse/jquery-t
 ### Credits
 
 - https://github.com/coderello/laraflash
+- https://github.com/tjmugova/laravel-flash
+- https://github.com/mattlibera/livewire-flash

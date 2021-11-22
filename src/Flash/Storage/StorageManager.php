@@ -3,13 +3,13 @@
 namespace Simtabi\Larabell\Flash\Storage;
 
 use Illuminate\Support\Manager;
-use Simtabi\Larabell\LarabelHelper;
+use Simtabi\Larabell\Larabell;
 
 class StorageManager extends Manager
 {
     public function getDefaultDriver()
     {
-        return $this->container['config'][LarabelHelper::getFlashStorageDriver()];
+        return $this->container['config'][Larabell::getFlashStorageDriver()];
     }
 
     public function createSessionDriver()

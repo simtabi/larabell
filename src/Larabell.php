@@ -4,7 +4,7 @@ namespace Simtabi\Larabell;
 
 use Illuminate\Support\Str;
 
-class LarabelHelper
+class Larabell
 {
 
     public const LEVEL_TYPE_INFO    = 'info';
@@ -12,19 +12,14 @@ class LarabelHelper
     public const LEVEL_TYPE_WARNING = 'warning';
     public const LEVEL_TYPE_ERROR   = 'error';
 
-    public static function getLarabellHelperFacadeName(): string
+    public static function getLarabellFacadeName(): string
     {
-        return 'larabell-helper';
+        return 'larabell';
     }
 
     public static function getFlashFacadeName(): string
     {
         return 'larabell-flash';
-    }
-
-    public static function getFlashSessionName(): string
-    {
-        return self::getConfig('flash.session_flash');
     }
 
     public static function getFlashStorageDriver(): string

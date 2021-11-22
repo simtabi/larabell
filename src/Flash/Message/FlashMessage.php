@@ -3,7 +3,7 @@
 namespace Simtabi\Larabell\Flash\Message;
 
 use ArrayAccess;
-use Simtabi\Larabell\LarabelHelper;
+use Simtabi\Larabell\Larabell;
 use Simtabi\Larabell\Flash\Exceptions\InvalidDelayException;
 use Simtabi\Larabell\Flash\Exceptions\InvalidHopsAmountException;
 use Illuminate\Contracts\Support\Arrayable;
@@ -71,28 +71,28 @@ class FlashMessage implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
 
     public function error(): self
     {
-        $this->type(LarabelHelper::LEVEL_TYPE_ERROR);
+        $this->type(Larabell::LEVEL_TYPE_ERROR);
 
         return $this;
     }
 
     public function warning(): self
     {
-        $this->type(LarabelHelper::LEVEL_TYPE_WARNING);
+        $this->type(Larabell::LEVEL_TYPE_WARNING);
 
         return $this;
     }
 
     public function info(): self
     {
-        $this->type(LarabelHelper::LEVEL_TYPE_INFO);
+        $this->type(Larabell::LEVEL_TYPE_INFO);
 
         return $this;
     }
 
     public function success(): self
     {
-        $this->type(LarabelHelper::LEVEL_TYPE_SUCCESS);
+        $this->type(Larabell::LEVEL_TYPE_SUCCESS);
 
         return $this;
     }
