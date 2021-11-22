@@ -19,7 +19,7 @@ class Larabell
 
     public static function getFlashFacadeName(): string
     {
-        return 'larabell-flash';
+        return 'flash';
     }
 
     public static function getFlashStorageDriver(): string

@@ -53,7 +53,7 @@ class FlashServiceProvider extends ServiceProvider
         $this->app->singleton(StorageManager::class, function (Application $app) {
             return new StorageManager($app);
         });
-
+        
         $this->app->bind(StorageContract::class, function (Application $app) {
             /** @var StorageManager $messagesStorageManager */
             $messagesStorageManager = $app->make(StorageManager::class);
