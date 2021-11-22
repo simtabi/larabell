@@ -2,8 +2,8 @@
 
 namespace Simtabi\Larabell\Flash\Message;
 
-use Simtabi\Larabell\Flash\Contracts\FlashMessageFactoryContract;
 use Illuminate\Container\Container;
+use Simtabi\Larabell\Flash\Contracts\FlashMessageFactoryContract;
 
 class FlashMessageFactory implements FlashMessageFactoryContract
 {
