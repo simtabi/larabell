@@ -28,7 +28,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Simtabi\\Larabell\\Core\\LarabellServiceProvider"
+        "Simtabi\\Larabell\\LarabellServiceProvider"
       ],
       "aliases": {
 
