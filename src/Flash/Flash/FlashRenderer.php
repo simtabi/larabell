@@ -31,7 +31,7 @@ class FlashRenderer implements FlashRendererContract
         return $this->separator ?? $this->configRepository->get('laraflash.separator');
     }
 
-    public function render(FlashNotifier $laraflash): string
+    public function render(Flash $laraflash): string
     {
         return $laraflash->ready()
             ->map(function (FlashMessage $message) {

@@ -6,5 +6,5 @@ use Illuminate\Http\Request;
 
 interface FlashPreparerContract
 {
-    public function handle(FlashNotifier $flash, Request $request);
+    public function handle(Flash $flash, Request $request);
 }

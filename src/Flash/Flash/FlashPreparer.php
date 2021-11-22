@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class FlashPreparer implements FlashPreparerContract
 {
-    public function handle(FlashNotifier $flash, Request $request)
+    public function handle(Flash $flash, Request $request)
     {
         $flash->touch();
     }

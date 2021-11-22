@@ -14,7 +14,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
 use JsonSerializable;
 
-class FlashNotifier implements ArrayAccess, Arrayable, Jsonable, JsonSerializable, Renderable, Htmlable
+class Flash implements ArrayAccess, Arrayable, Jsonable, JsonSerializable, Renderable, Htmlable
 {
     /** @var Collection */
     protected $messages;

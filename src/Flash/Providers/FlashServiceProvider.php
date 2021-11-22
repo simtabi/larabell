@@ -7,7 +7,7 @@ use Simtabi\Larabell\Flash\Message\FlashMessageFactory;
 use Simtabi\Larabell\Flash\Message\FlashMessageFactoryContract;
 use Simtabi\Larabell\Flash\Message\FlashMessageRendererContract;
 use Simtabi\Larabell\Flash\Message\FlashMessageViewRenderer;
-use Simtabi\Larabell\Flash\Flash\FlashNotifier;
+use Simtabi\Larabell\Flash\Flash\Flash;
 use Simtabi\Larabell\Flash\Flash\FlashPreparer;
 use Simtabi\Larabell\Flash\Flash\FlashPreparerContract;
 use Simtabi\Larabell\Flash\Flash\FlashRenderer;
@@ -60,7 +60,7 @@ class FlashServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton(LarabelHelper::getFlashFacadeName(), function (Application $app) {
-            return $app->make(FlashNotifier::class);
+            return $app->make(Flash::class);
         });
     }
 
@@ -70,9 +70,9 @@ class FlashServiceProvider extends ServiceProvider
             // This is used when adding a message from a controller: view('posts-index')->withMessage(...)
             View::macro('withMessage', function (Message $message, string $bag = 'default'): View {
                 /** @var ViewFlashMessageBag $viewFlashMessageBag */
-                $viewFlashMessageBag = ViewFacade::shared(FlashNotifier::getConfig('view_share'), new ViewFlashMessageBag());
+                $viewFlashMessageBag = ViewFacade::shared(Flash::getConfig('view_share'), new ViewFlashMessageBag());
 
-                ViewFacade::share(FlashNotifier::getConfig('view_share'), $viewFlashMessageBag->push($message, $bag));
+                ViewFacade::share(Flash::getConfig('view_share'), $viewFlashMessageBag->push($message, $bag));
 
                 return $this;
             });
@@ -80,9 +80,9 @@ class FlashServiceProvider extends ServiceProvider
             // This is used when adding a message from the View Facade: ViewFacade::withMessage(...)
             Factory::macro('withMessage', function (Message $message, string $bag = 'default'): Factory {
                 /** @var ViewFlashMessageBag $viewFlashMessageBag */
-                $viewFlashMessageBag = ViewFacade::shared(FlashNotifier::getConfig('view_share'), new ViewFlashMessageBag());
+                $viewFlashMessageBag = ViewFacade::shared(Flash::getConfig('view_share'), new ViewFlashMessageBag());
 
-                ViewFacade::share(FlashNotifier::getConfig('view_share'), $viewFlashMessageBag->push($message, $bag));
+                ViewFacade::share(Flash::getConfig('view_share'), $viewFlashMessageBag->push($message, $bag));
 
                 return $this;
             });
@@ -90,13 +90,13 @@ class FlashServiceProvider extends ServiceProvider
             // This is used when adding messages from a controller: view('posts-index')->withMessages(...)
             View::macro('withMessages', function (array $messages, string $bag = 'default'): View {
                 /** @var ViewFlashMessageBag $viewFlashMessageBag */
-                $viewFlashMessageBag = ViewFacade::shared(FlashNotifier::getConfig('view_share'), new ViewFlashMessageBag());
+                $viewFlashMessageBag = ViewFacade::shared(Flash::getConfig('view_share'), new ViewFlashMessageBag());
 
                 /** @var Message $message */
                 foreach ($messages as $message) {
                     $viewFlashMessageBag->push($message, $bag);
                 }
-                ViewFacade::share(FlashNotifier::getConfig('view_share'), $viewFlashMessageBag);
+                ViewFacade::share(Flash::getConfig('view_share'), $viewFlashMessageBag);
 
                 return $this;
             });
@@ -104,13 +104,13 @@ class FlashServiceProvider extends ServiceProvider
             // This is used when adding messages from the View Facade: ViewFacade::withMessages(...)
             Factory::macro('withMessages', function (array $messages, string $bag = 'default'): Factory {
                 /** @var ViewFlashMessageBag $viewFlashMessageBag */
-                $viewFlashMessageBag = ViewFacade::shared(FlashNotifier::getConfig('view_share'), new ViewFlashMessageBag());
+                $viewFlashMessageBag = ViewFacade::shared(Flash::getConfig('view_share'), new ViewFlashMessageBag());
 
                 /** @var Message $message */
                 foreach ($messages as $message) {
                     $viewFlashMessageBag->push($message, $bag);
                 }
-                ViewFacade::share(FlashNotifier::getConfig('view_share'), $viewFlashMessageBag);
+                ViewFacade::share(Flash::getConfig('view_share'), $viewFlashMessageBag);
 
                 return $this;
             });
