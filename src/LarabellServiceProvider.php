@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
 use Illuminate\Foundation\Application;
-use Simtabi\Larabell\Flash\Providers\FlashServiceProvider;
+use Simtabi\Larabell\Toast\ToastServiceProvider;
 
 class LarabellServiceProvider extends BaseServiceProvider
 {
@@ -30,9 +30,7 @@ class LarabellServiceProvider extends BaseServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(Larabell::getLarabellFacadeName(), function (Application $app) {
-            return $app->make(Larabell::class);
-        });
+      //
     }
 
     /**
@@ -57,13 +55,8 @@ class LarabellServiceProvider extends BaseServiceProvider
         }
 
         $this->registerDirectives();
+        $this->app->register(ToastServiceProvider::class);
 
-        $this->app->register(LarabellServiceProvider::class);
-        $this->app->register(FlashServiceProvider::class);
-
-        /** @var Router $router */
-        $router = $this->app['router'];
-        $router->pushMiddlewareToGroup('web', LarabellMiddleware::class);
     }
 
     private function registerPublishables(): void
@@ -83,8 +76,9 @@ class LarabellServiceProvider extends BaseServiceProvider
 
     private function registerDirectives()
     {
-        // inject required javascript
-        Blade::include('larabell::init', 'larabellInit');
+        // inject required view files
+        Blade::include('larabell::scripts', 'larabellScripts');
+        Blade::include('larabell::styles', 'larabellStyles');
     }
 
 }

@@ -1,4 +1,3 @@
-@larabellToastCss
 @larabellToastJs
 
 <script>
