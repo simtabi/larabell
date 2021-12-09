@@ -76,7 +76,11 @@ console.log(event)
                 reverseButtons     : getValue(event.reverseButtons, true),
             }).then((result) => {
                 if (result.isConfirmed) {
-                    return livewire.emit(event.method, event.eventMethodParams)
+                    if (event.eventMethodParams) {
+                        return livewire.emit(event.method, event.eventMethodParams)
+                    }else {
+                        return livewire.emit(event.method)
+                    }
                 } else if (result.isDenied) {
                     return livewire.emit(event.method, event.eventMethodParams)
                 }
