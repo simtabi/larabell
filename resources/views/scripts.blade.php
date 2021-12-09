@@ -49,28 +49,8 @@
     }
 
     function SwalModal(event) {
-
-        if (event.swalType === 'confirm'){
-            Swal.fire({
-                icon               : getValue(event.icon, 'warning'),
-                title              : getValue(event.title, null),
-                html               : getValue(event.html, null),
-                showCancelButton   : getValue(event.showCancelButton, true),
-                confirmButtonColor : getValue(event.confirmButtonColor, '#3085d6'),
-                cancelButtonColor  : getValue(event.cancelButtonColor, '#d33'),
-                confirmButtonText  : getValue(event.confirmButtonText, 'Cool'),
-                reverseButtons     : getValue(event.reverseButtons, true),
-            }).then((result) => {
-
-                if (result.isConfirmed) {
-                    return livewire.emit(event.method, event.params)
-                } else if (result.isDenied) {
-                    return livewire.emit(event.method, event.params)
-                }else if (callback) {
-                    return livewire.emit(event.callback)
-                }
-            });
-        }else {
+console.log(event)
+        if (event.isModal === true){
             Swal.fire({
                 icon              : getValue(event.icon, 'warning'),
                 title             : getValue(event.title, null),
@@ -84,6 +64,23 @@
                     toast.addEventListener('mouseleave', Swal.resumeTimer)
                 }
             })
+        }else {
+            Swal.fire({
+                icon               : getValue(event.icon, 'warning'),
+                title              : getValue(event.title, null),
+                html               : getValue(event.html, null),
+                showCancelButton   : getValue(event.showCancelButton, true),
+                confirmButtonColor : getValue(event.confirmButtonColor, '#3085d6'),
+                cancelButtonColor  : getValue(event.cancelButtonColor, '#d33'),
+                confirmButtonText  : getValue(event.confirmButtonText, 'Cool'),
+                reverseButtons     : getValue(event.reverseButtons, true),
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    return livewire.emit(event.method, event.eventMethodParams)
+                } else if (result.isDenied) {
+                    return livewire.emit(event.method, event.eventMethodParams)
+                }
+            });
         }
 
     }

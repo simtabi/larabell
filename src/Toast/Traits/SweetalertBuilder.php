@@ -4,6 +4,10 @@ namespace Simtabi\Larabell\Toast\Traits;
 
 trait SweetalertBuilder
 {
+    public bool    $swalModalType              = true; // trigger modal type, else confirm modal
+    public string  $swalEventMethod; // event method
+    public array   $swalEventMethodParams; // event method params
+
     public ?string $swalIcon                   = 'warning'; // Type of toast icon
     public ?string $swalText                   = "Don't forget to star the repository if you like it."; // Text that is to be shown in the toast
     public ?string $swalPosition               = 'top-right'; // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
@@ -58,6 +62,34 @@ trait SweetalertBuilder
 
     // with rtl
     public ?string $swalIconHtml              = '؟';
+
+    /**
+     * @param bool $swalModalType
+     * @return self
+     */
+    public function setSwalModalType(bool $swalModalType): self
+    {
+        $this->swalModalType = $swalModalType;
+        return $this;
+    }
+    /**
+     * @param string $swalEventMethod
+     * @return self
+     */
+    public function setSwalEventMethod($swalEventMethod): self
+    {
+        $this->swalEventMethod = $swalEventMethod;
+        return $this;
+    }
+    /**
+     * @param array $swalEventMethodParams
+     * @return self
+     */
+    public function setSwalEventMethodParams(...$swalEventMethodParams): self
+    {
+        $this->swalEventMethodParams = func_get_args();
+        return $this;
+    }
 
     /**
      * @param string|null $swalIcon
@@ -392,6 +424,30 @@ trait SweetalertBuilder
     /**
      * @return string|null
      */
+    public function isSwalModalType(): bool
+    {
+        return $this->swalModalType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSwalEventMethod(): string
+    {
+        return $this->swalEventMethod;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSwalEventMethodParams(): array
+    {
+        return $this->swalEventMethodParams;
+    }
+
+    /**
+     * @return string|null
+     */
     public function getSwalIcon(): ?string
     {
         return $this->swalIcon;
@@ -662,6 +718,10 @@ trait SweetalertBuilder
     public function fireSweetalertModal()
     {
         return $this->emit('larabellSwal:fire', [
+            'isModal'                => $this->swalModalType,
+            'eventMethod'            => $this->swalEventMethod,
+            'eventMethodParams'      => $this->swalEventMethodParams,
+
             'icon'                   => $this->swalIcon,
             'text'                   => $this->swalText,
             'position'               => $this->swalPosition,
