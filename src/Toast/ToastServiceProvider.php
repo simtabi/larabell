@@ -4,12 +4,9 @@ namespace Simtabi\Larabell\Toast;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use Simtabi\Larabell\Providers\Extra\FlashMessageServiceProvider;
-use Illuminate\View\Compilers\BladeCompiler;
 
 class ToastServiceProvider extends ServiceProvider
 {
-
 
     public static array $cdnAssets = [
         'css'  => [
