@@ -81,9 +81,8 @@
 
                     if (event.eventMethodParams) {
                         return  window.livewire.emit(event.eventMethod, event.eventMethodParams)
-                    }else {
-                        return  window.livewire.emit(event.eventMethod)
                     }
+
                 } else if (
                     /* Read more about handling dismissals below */
                     result.dismiss === Swal.DismissReason.cancel
@@ -96,8 +95,6 @@
 
                     if (event.eventMethodParams) {
                         return  window.livewire.emit(event.eventCancelledMethod, event.eventCancelledMethodParams)
-                    }else {
-                        return  window.livewire.emit(event.eventCancelledMethod)
                     }
                 }
             })
