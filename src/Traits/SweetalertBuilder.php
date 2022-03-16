@@ -13,12 +13,12 @@ trait SweetalertBuilder
     public string $swalEventMethod; // event method
     public array  $swalEventMethodParams; // event method params
 
-    public string $swalEventCancelledMethod; // cancelled event method
-    public array  $swalEventCancelledMethodParams; // cancelled event method params
+    public ?string $swalEventCancelledMethod      = null; // cancelled event method
+    public array  $swalEventCancelledMethodParams = []; // cancelled event method params
 
-    public string $swalIcon                   = 'warning'; // Type of toast icon
-    public string $swalText                   = "Don't forget to star the repository if you like it."; // Text that is to be shown in the toast
-    public string $swalPosition               = 'top-right'; // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+    public string $swalIcon                       = 'warning'; // Type of toast icon
+    public string $swalText                       = "Don't forget to star the repository if you like it."; // Text that is to be shown in the toast
+    public string $swalPosition                   = 'top-right'; // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
 
 
     // defaults
