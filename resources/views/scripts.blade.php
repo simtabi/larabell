@@ -91,7 +91,7 @@
 
     document.addEventListener('DOMContentLoaded', function() {
 
-        if (Livewire == undefined) {
+        if (Livewire === undefined) {
             return;
         }
 
