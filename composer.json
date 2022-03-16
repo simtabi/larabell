@@ -28,10 +28,10 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Simtabi\\Larabell\\LarabellServiceProvider"
+        "Simtabi\\Larabell\\Providers\\LarabellServiceProvider"
       ],
       "aliases": {
-        "Larabell" : "Simtabi\\Larabell\\LarabellFacade"
+        "Larabell" : "Simtabi\\Larabell\\Facades\\LarabellFacade"
       }
     }
   }

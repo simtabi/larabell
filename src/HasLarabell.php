@@ -2,8 +2,8 @@
 
 namespace Simtabi\Larabell;
 
-use Simtabi\Larabell\Toast\Traits\SweetalertBuilder;
-use Simtabi\Larabell\Toast\Traits\ToastBuilder;
+use Simtabi\Larabell\Traits\SweetalertBuilder;
+use Simtabi\Larabell\Traits\ToastBuilder;
 
 trait HasLarabell
 {

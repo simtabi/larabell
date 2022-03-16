@@ -59,7 +59,7 @@ class MyComponent extends Component
     use HasLarabell;
 
     public function save() {
-        $this->fireSweetalertModal();
+        $this->fireSwalNotification();
     }
 
 }

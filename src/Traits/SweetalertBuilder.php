@@ -1,77 +1,103 @@
 <?php
 
-namespace Simtabi\Larabell\Toast\Traits;
+namespace Simtabi\Larabell\Traits;
 
 trait SweetalertBuilder
 {
-    public $isSwalModal                = true; // trigger modal type, else confirm modal
-    public $swalEventMethod; // event method
-    public $swalEventMethodParams; // event method params
+    public bool   $isSwalConfirmModal        = true; // trigger modal type, else confirm modal
+    public string $swalConfirmedText         = 'Successfully confirmed!';
+    public string $swalConfirmCancelledText  = 'Confirm action canceled!';
 
-    public $swalIcon                   = 'warning'; // Type of toast icon
-    public $swalText                   = "Don't forget to star the repository if you like it."; // Text that is to be shown in the toast
-    public $swalPosition               = 'top-right'; // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+    public string $swalEventMethod; // event method
+    public array  $swalEventMethodParams; // event method params
+
+    public string $swalIcon                   = 'warning'; // Type of toast icon
+    public string $swalText                   = "Don't forget to star the repository if you like it."; // Text that is to be shown in the toast
+    public string $swalPosition               = 'top-right'; // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
 
 
     // defaults
-    public $swalTitle                  = 'Oops...';
-    public $swalFooter                 = '<a href="">Why do I have this issue?</a>';
+    public string   $swalTitle                  = 'Oops...';
+    public string   $swalFooter                 = '<a href="">Why do I have this issue?</a>';
 
     // with image
-    public $swalImageUrl               = '#';
-    public $swalImageAlt               = 'A tall image';
-    public $swalImageHeight            = 1500;
-    public $swalImageWidth             = 400;
+    public ?string  $swalImageUrl               = null;
+    public string   $swalImageAlt               = 'A swak image';
+    public int      $swalImageHeight            = 1500;
+    public int      $swalImageWidth             = 400;
 
     // with html
-    public $swalHtml                   = 'You can use <b>bold text</b>, <a href="//sweetalert2.github.io">links</a> and other HTML tags';
-    public $swalShowCloseButton        = true;
-    public $swalShowCancelButton       = true;
-    public $swalFocusConfirm           = false;
-    public $swalConfirmButtonText      = '<i class="fa fa-thumbs-up"></i> Great!';
-    public $swalConfirmButtonAriaLabel = 'Thumbs up, great!';
-    public $swalCancelButtonText       = '<i class="fa fa-thumbs-down"></i>';
-    public $swalCancelButtonAriaLabel  = 'Thumbs down';
+    public string   $swalHtml                   = 'You can use <b>bold text</b>, <a href="//sweetalert2.github.io">links</a> and other HTML tags';
+    public bool     $swalShowCloseButton        = true;
+    public bool     $swalShowCancelButton       = true;
+    public bool     $swalFocusConfirm           = false;
+    public string   $swalConfirmButtonText      = '<i class="fa fa-thumbs-up"></i> Great!';
+    public string   $swalConfirmButtonAriaLabel = 'Thumbs up, great!';
+    public string   $swalCancelButtonText       = '<i class="fa fa-thumbs-down"></i>';
+    public string   $swalCancelButtonAriaLabel  = 'Thumbs down';
 
     // dialog with 3 buttons
-    public $swalShowDenyButton         = true;
-    public $swalDenyButtonText         = 'Don\'t save';
+    public bool     $swalShowDenyButton         = true;
+    public string   $swalDenyButtonText         = 'Don\'t save';
 
     // with custom position
-    public $swalShowConfirmButton      = false;
-    public $swalTimer                  = 1500;
+    public bool    $swalShowConfirmButton      = false;
+    public int     $swalTimer                  = 1500;
 
     // with animate css
-    public $swalShowClass              = 'animate__animated animate__fadeInDown';
-    public $swalHideClass              = 'animate__animated animate__fadeOutUp';
+    public string  $swalShowClass              = 'animate__animated animate__fadeInDown';
+    public string  $swalHideClass              = 'animate__animated animate__fadeOutUp';
 
     // confirm dialog
-    public $swalConfirmButtonColor     = '#3085d6';
-    public $swalCancelButtonColor      = '#d33';
+    public string  $swalConfirmButtonColor     = '#3085d6';
+    public string  $swalCancelButtonColor      = '#d33';
 
     // custom width/padding
-    public $swalWidth                  = 600;
-    public $swalPadding                = '3em';
-    public $swalBackground             = '#fff';
-    public $swalBackdrop               = null;
+    public int     $swalWidth                  = 600;
+    public string  $swalPadding                = '3em';
+    public string  $swalBackground             = '#fff';
+    public         $swalBackdrop               = null;
 
     // autoclose timer
-    public $swalTimerProgressBar      = true;
-    public $swalDidOpen               = null; // call back
-    public $swalWillClose             = null; // timer
+    public bool    $swalTimerProgressBar      = true;
+    public ?string $swalDidOpen               = null; // call back
+    public ?string $swalWillClose             = null; // timer
 
     // with rtl
-    public $swalIconHtml              = '؟';
+    public string  $swalIconHtml              = '؟';
 
     /**
      * @param bool $status
      * @return self
      */
-    public function setIsSwalModal(bool $status): self
+    public function setIsSwalConfirmModal(bool $status): self
     {
-        $this->isSwalModal = $status;
+        $this->isSwalConfirmModal = $status;
         return $this;
     }
+
+    /**
+     * @param string $text
+     * @return self
+     */
+    public function setSwalConfirmedText(string $text): self
+    {
+        $this->swalConfirmedText = $text;
+
+        return $this;
+    }
+
+    /**
+     * @param string $text
+     * @return self
+     */
+    public function setSwalConfirmCancelledText(string $text): self
+    {
+        $this->swalConfirmCancelledText = $text;
+
+        return $this;
+    }
+
     /**
      * @param string $swalEventMethod
      * @return self
@@ -424,9 +450,25 @@ trait SweetalertBuilder
     /**
      * @return string|null
      */
-    public function isIsSwalModal(): bool
+    public function isSwalConfirmModal(): bool
     {
-        return $this->isSwalModal;
+        return $this->isSwalConfirmModal;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSwalConfirmedText(): string
+    {
+        return $this->swalConfirmedText;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSwalConfirmCancelledText(): string
+    {
+        return $this->swalConfirmCancelledText;
     }
 
     /**
@@ -709,72 +751,73 @@ trait SweetalertBuilder
         return $this->swalIconHtml;
     }
 
-
     /**
      * Popup sweetalert modal
      *
      * @return mixed
      */
-    public function fireSweetalertModal()
+    public function fireSwalNotification()
     {
         return $this->emit('larabellSwal:fire', [
-            'isModal'                => $this->isSwalModal,
-            'eventMethod'            => $this->swalEventMethod,
-            'eventMethodParams'      => $this->swalEventMethodParams,
+            'isConfirmModal'           => $this->isSwalConfirmModal,
+            'swalConfirmedText'        => $this->swalConfirmedText,
+            'swalConfirmCancelledText' => $this->swalConfirmCancelledText,
+            'eventMethod'              => $this->swalEventMethod,
+            'eventMethodParams'        => $this->swalEventMethodParams,
 
-            'icon'                   => $this->swalIcon,
-            'text'                   => $this->swalText,
-            'position'               => $this->swalPosition,
+            'icon'                     => $this->swalIcon,
+            'text'                     => $this->swalText,
+            'position'                 => $this->swalPosition,
 
             // defaults
-            'title'                  => $this->swalTitle,
-            'footer'                 => $this->swalFooter,
+            'title'                    => $this->swalTitle,
+            'footer'                   => $this->swalFooter,
 
             // with image
-            'imageUrl'               => $this->swalImageUrl,
-            'imageAlt'               => $this->swalImageAlt,
-            'imageHeight'            => $this->swalImageHeight,
-            'imageWidth'             => $this->swalImageWidth,
+            'imageUrl'                 => $this->swalImageUrl,
+            'imageAlt'                 => $this->swalImageAlt,
+            'imageHeight'              => $this->swalImageHeight,
+            'imageWidth'               => $this->swalImageWidth,
 
             // with html
-            'html'                   => $this->swalHtml,
-            'showCloseButton'        => $this->swalShowCloseButton,
-            'showCancelButton'       => $this->swalShowCancelButton,
-            'focusConfirm'           => $this->swalFocusConfirm,
-            'confirmButtonText'      => $this->swalConfirmButtonText,
-            'confirmButtonAriaLabel' => $this->swalConfirmButtonAriaLabel,
-            'cancelButtonText'       => $this->swalCancelButtonText,
-            'cancelButtonAriaLabel'  => $this->swalCancelButtonAriaLabel,
+            'html'                     => $this->swalHtml,
+            'showCloseButton'          => $this->swalShowCloseButton,
+            'showCancelButton'         => $this->swalShowCancelButton,
+            'focusConfirm'             => $this->swalFocusConfirm,
+            'confirmButtonText'        => $this->swalConfirmButtonText,
+            'confirmButtonAriaLabel'   => $this->swalConfirmButtonAriaLabel,
+            'cancelButtonText'         => $this->swalCancelButtonText,
+            'cancelButtonAriaLabel'    => $this->swalCancelButtonAriaLabel,
 
             // dialog with 3 buttons
-            'showDenyButton'         => $this->swalShowDenyButton,
-            'denyButtonText'         => $this->swalDenyButtonText,
+            'showDenyButton'           => $this->swalShowDenyButton,
+            'denyButtonText'           => $this->swalDenyButtonText,
 
             // with custom position
-            'showConfirmButton'      => $this->swalShowConfirmButton,
-            'timer'                  => $this->swalTimer,
+            'showConfirmButton'        => $this->swalShowConfirmButton,
+            'timer'                    => $this->swalTimer,
 
             // with animate css
-            'showClass'              => $this->swalShowClass,
-            'hideClass'              => $this->swalHideClass,
+            'showClass'                => $this->swalShowClass,
+            'hideClass'                => $this->swalHideClass,
 
             // confirm dialog
-            'confirmButtonColor'     => $this->swalConfirmButtonColor,
-            'cancelButtonColor'      => $this->swalCancelButtonColor,
+            'confirmButtonColor'       => $this->swalConfirmButtonColor,
+            'cancelButtonColor'        => $this->swalCancelButtonColor,
 
             // custom width/padding
-            'width'                  => $this->swalWidth,
-            'padding'                => $this->swalPadding,
-            'background'             => $this->swalBackground,
-            'backdrop'               => $this->swalBackdrop,
+            'width'                    => $this->swalWidth,
+            'padding'                  => $this->swalPadding,
+            'background'               => $this->swalBackground,
+            'backdrop'                 => $this->swalBackdrop,
 
             // autoclose timer
-            'timerProgressBar'      => $this->swalTimerProgressBar,
-            'didOpen'               => $this->swalDidOpen,
-            'willClose'             => $this->swalWillClose,
+            'timerProgressBar'         => $this->swalTimerProgressBar,
+            'didOpen'                  => $this->swalDidOpen,
+            'willClose'                => $this->swalWillClose,
 
             // with rtl
-            'iconHtml'              => $this->swalIconHtml,
+            'iconHtml'                 => $this->swalIconHtml,
         ]);
     }
 }

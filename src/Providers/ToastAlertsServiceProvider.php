@@ -1,11 +1,11 @@
 <?php
 
-namespace Simtabi\Larabell\Toast;
+namespace Simtabi\Larabell\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
-class ToastServiceProvider extends ServiceProvider
+class ToastAlertsServiceProvider extends ServiceProvider
 {
 
     public static array $cdnAssets = [

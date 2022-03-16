@@ -1,10 +1,10 @@
 <?php
 
-namespace Simtabi\Larabell;
+namespace Simtabi\Larabell\Supports;
 
 use Illuminate\Support\Str;
 
-class LarabellHelper
+class Larabell
 {
 
     public const LEVEL_TYPE_INFO    = 'info';
@@ -21,5 +21,5 @@ class LarabellHelper
     {
         return Str::of($string)->kebab();
     }
-    
+
 }

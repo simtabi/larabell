@@ -50,7 +50,61 @@
 
     function SwalModal(event) {
 
-        if (event.isModal === true){
+        if (event.isConfirmModal === true){
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                icon               : getValue(event.icon, 'warning'),
+                title              : getValue(event.title, null),
+                text               : getValue(event.text, null),
+                html               : getValue(event.html, null),
+                showCancelButton   : getValue(event.showCancelButton, true),
+                cancelButtonText   : getValue(event.cancelButtonText, "No, I don't approve!"),
+                confirmButtonColor : getValue(event.confirmButtonColor, '#3085d6'),
+                cancelButtonColor  : getValue(event.cancelButtonColor, '#d33'),
+                confirmButtonText  : getValue(event.confirmButtonText, 'Yes, I approve!'),
+                reverseButtons     : getValue(event.reverseButtons, true),
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    swalWithBootstrapButtons.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Cancelled',
+                        'Your imaginary file is safe :)',
+                        'error'
+                    )
+                }
+            })
+
+
+            Swal.fire({
+
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    if (event.eventMethodParams) {
+                        return  window.livewire.emit(event.eventMethod, event.eventMethodParams)
+                    }else {
+                        return  window.livewire.emit(event.eventMethod)
+                    }
+                } else if (result.isDenied) {
+                    return  window.livewire.emit(event.eventMethod, event.eventMethodParams)
+                }
+            });
+        }else {
             Swal.fire({
                 icon              : getValue(event.icon, 'warning'),
                 title             : getValue(event.title, null),
@@ -64,27 +118,6 @@
                     toast.addEventListener('mouseleave', Swal.resumeTimer)
                 }
             })
-        }else {
-            Swal.fire({
-                icon               : getValue(event.icon, 'warning'),
-                title              : getValue(event.title, null),
-                html               : getValue(event.html, null),
-                showCancelButton   : getValue(event.showCancelButton, true),
-                confirmButtonColor : getValue(event.confirmButtonColor, '#3085d6'),
-                cancelButtonColor  : getValue(event.cancelButtonColor, '#d33'),
-                confirmButtonText  : getValue(event.confirmButtonText, 'Cool'),
-                reverseButtons     : getValue(event.reverseButtons, true),
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    if (event.eventMethodParams) {
-                        return livewire.emit(event.method, event.eventMethodParams)
-                    }else {
-                        return livewire.emit(event.method)
-                    }
-                } else if (result.isDenied) {
-                    return livewire.emit(event.method, event.eventMethodParams)
-                }
-            });
         }
 
     }

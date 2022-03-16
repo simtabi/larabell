@@ -1,6 +1,6 @@
 <?php
 
-namespace Simtabi\Larabell;
+namespace Simtabi\Larabell\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;

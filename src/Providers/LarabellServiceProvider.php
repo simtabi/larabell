@@ -1,17 +1,16 @@
 <?php
 
-namespace Simtabi\Larabell;
+namespace Simtabi\Larabell\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use Illuminate\View\Compilers\BladeCompiler;
-use Illuminate\Foundation\Application;
-use Simtabi\Larabell\Toast\ToastServiceProvider;
+use Simtabi\Larabell\Commands\InstallCommand;
+use Simtabi\Larabell\Toast\ToastAlertsServiceProvider;
 
 class LarabellServiceProvider extends BaseServiceProvider
 {
 
-    private const PACKAGE_PATH = __DIR__ . '/../';
+    private const PACKAGE_PATH = __DIR__ . '/../../';
 
     /**
      * Get the services provided by the provider.
@@ -55,7 +54,7 @@ class LarabellServiceProvider extends BaseServiceProvider
         }
 
         $this->registerDirectives();
-        $this->app->register(ToastServiceProvider::class);
+        $this->app->register(ToastAlertsServiceProvider::class);
 
     }
 

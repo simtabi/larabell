@@ -1,6 +1,6 @@
 <?php
 
-namespace Simtabi\Larabell\Toast\Traits;
+namespace Simtabi\Larabell\Traits;
 
 trait ToastBuilder
 {
