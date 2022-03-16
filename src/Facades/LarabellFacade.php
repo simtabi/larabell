@@ -14,6 +14,6 @@ class LarabellFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return Larabell::getFlashFacadeName();
+        return Larabell::class;
     }
 }
