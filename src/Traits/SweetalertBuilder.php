@@ -835,9 +835,10 @@ trait SweetalertBuilder
      *
      * @return mixed
      */
-    public function fireSwalNotification()
+    public function fireSwalNotification(?string $componentName = null)
     {
         return $this->emit('larabellSwal:fire', [
+            'componentName'               => $componentName,
             'isConfirmModal'              => $this->isSwalConfirmModal,
 
             'swalConfirmedText'           => $this->swalConfirmedText,

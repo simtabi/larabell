@@ -9,7 +9,92 @@
         return $default;
     }
 
-    function ToastNotification(event) {
+    window.livewire.on('larabellSwal:fire', event => {
+
+        if (event.isConfirmModal === true){
+
+            var componentName = getValue(event.componentName);
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                icon               : getValue(event.icon, 'warning'),
+                title              : getValue(event.title, null),
+                text               : getValue(event.text, null),
+                html               : getValue(event.html, null),
+                showCancelButton   : getValue(event.showCancelButton, true),
+                cancelButtonText   : getValue(event.cancelButtonText, "No, I don't approve!"),
+                confirmButtonColor : getValue(event.confirmButtonColor, '#3085d6'),
+                cancelButtonColor  : getValue(event.cancelButtonColor, '#d33'),
+                confirmButtonText  : getValue(event.confirmButtonText, 'Yes, I approve!'),
+                reverseButtons     : getValue(event.reverseButtons, true),
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    swalWithBootstrapButtons.fire(
+                        getValue(event.swalConfirmedTitle, 'Confirmed'),
+                        getValue(event.swalConfirmedText, 'Successfully confirmed!'),
+                        'success'
+                    )
+
+                    var eventMethod       = getValue(event.eventMethod);
+                    var eventMethodParams = getValue(event.eventMethodParams);
+
+                    if (eventMethod && componentName) {
+                        if (componentName) {
+                            window.livewire.emitTo(componentName, eventMethod, eventMethodParams)
+                        }else {
+                            window.livewire.emit(eventMethod, eventMethodParams)
+                        }
+                    }
+
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    swalWithBootstrapButtons.fire(
+                        getValue(event.swalConfirmCancelledTitle, 'Cancelled'),
+                        getValue(event.swalConfirmCancelledText, 'Cancelled successfully!!'),
+                        'error'
+                    )
+
+                    var eventCancelledMethod       = getValue(event.eventCancelledMethod);
+                    var eventCancelledMethodParams = getValue(event.eventCancelledMethodParams);
+
+                    if (eventCancelledMethod && componentName) {
+                        if (componentName) {
+                            window.livewire.emitTo(componentName, eventCancelledMethod, eventCancelledMethodParams)
+                        }else {
+                            window.livewire.emit(eventCancelledMethod, eventCancelledMethodParams)
+                        }
+                    }
+
+                    if (event.eventCancelledMethod) {
+                        window.livewire.emitTo(event.eventCancelledMethod, event.eventCancelledMethodParams)
+                    }
+                }
+            })
+
+        }else {
+            Swal.fire({
+                icon              : getValue(event.icon, 'warning'),
+                title             : getValue(event.title, null),
+                text              : getValue(event.text, null),
+                footer            : getValue(event.footer, null),
+                position          : getValue(event.position, 'top-right'),
+                showConfirmButton : getValue(event.showConfirmButton, false),
+                timerProgressBar  : getValue(event.timerProgressBar, true),
+                didOpen           : function(toast) {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+        }
+    })
+
+    window.livewire.on('larabellToast:fire', event => {
         if ($.fn.toast) {
             $.toast({
                 // Text that is to be shown in the toast
@@ -46,91 +131,6 @@
                 afterHidden        : function () {getValue(event.afterHidden, null)},
             });
         }
-    }
-
-    function SwalModal(event) {
-
-        if (event.isConfirmModal === true){
-
-            const swalWithBootstrapButtons = Swal.mixin({
-                customClass: {
-                    confirmButton: 'btn btn-success',
-                    cancelButton: 'btn btn-danger'
-                },
-                buttonsStyling: false
-            })
-
-            swalWithBootstrapButtons.fire({
-                icon               : getValue(event.icon, 'warning'),
-                title              : getValue(event.title, null),
-                text               : getValue(event.text, null),
-                html               : getValue(event.html, null),
-                showCancelButton   : getValue(event.showCancelButton, true),
-                cancelButtonText   : getValue(event.cancelButtonText, "No, I don't approve!"),
-                confirmButtonColor : getValue(event.confirmButtonColor, '#3085d6'),
-                cancelButtonColor  : getValue(event.cancelButtonColor, '#d33'),
-                confirmButtonText  : getValue(event.confirmButtonText, 'Yes, I approve!'),
-                reverseButtons     : getValue(event.reverseButtons, true),
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    swalWithBootstrapButtons.fire(
-                        getValue(event.swalConfirmedTitle, 'Confirmed'),
-                        getValue(event.swalConfirmedText, 'Successfully confirmed!'),
-                        'success'
-                    )
-
-                    if (event.eventMethodParams) {
-                        return  window.livewire.emit(event.eventMethod, event.eventMethodParams)
-                    }
-
-                } else if (
-                    /* Read more about handling dismissals below */
-                    result.dismiss === Swal.DismissReason.cancel
-                ) {
-                    swalWithBootstrapButtons.fire(
-                        getValue(event.swalConfirmCancelledTitle, 'Cancelled'),
-                        getValue(event.swalConfirmCancelledText, 'Cancelled successfully!!'),
-                        'error'
-                    )
-
-                    if (event.eventMethodParams) {
-                        return  window.livewire.emit(event.eventCancelledMethod, event.eventCancelledMethodParams)
-                    }
-                }
-            })
-
-        }else {
-            Swal.fire({
-                icon              : getValue(event.icon, 'warning'),
-                title             : getValue(event.title, null),
-                text              : getValue(event.text, null),
-                footer            : getValue(event.footer, null),
-                position          : getValue(event.position, 'top-right'),
-                showConfirmButton : getValue(event.showConfirmButton, false),
-                timerProgressBar  : getValue(event.timerProgressBar, true),
-                didOpen           : function(toast) {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            })
-        }
-
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-
-        if (Livewire === undefined) {
-            return;
-        }
-
-        Livewire.on('larabellToast:fire', event => {
-            return ToastNotification(event);
-        });
-
-        Livewire.on('larabellSwal:fire', event => {
-            return SwalModal(event);
-        });
-
-    });
+    })
 
 </script>
