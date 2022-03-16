@@ -49,7 +49,7 @@
     }
 
     function SwalModal(event) {
-console.log(event)
+
         if (event.isModal === true){
             Swal.fire({
                 icon              : getValue(event.icon, 'warning'),
