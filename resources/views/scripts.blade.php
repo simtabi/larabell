@@ -74,36 +74,34 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     swalWithBootstrapButtons.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
+                        getValue(event.swalConfirmedTitle, 'Confirmed'),
+                        getValue(event.swalConfirmedText, 'Successfully confirmed!'),
                         'success'
                     )
-                } else if (
-                    /* Read more about handling dismissals below */
-                    result.dismiss === Swal.DismissReason.cancel
-                ) {
-                    swalWithBootstrapButtons.fire(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    )
-                }
-            })
 
-
-            Swal.fire({
-
-            }).then((result) => {
-                if (result.isConfirmed) {
                     if (event.eventMethodParams) {
                         return  window.livewire.emit(event.eventMethod, event.eventMethodParams)
                     }else {
                         return  window.livewire.emit(event.eventMethod)
                     }
-                } else if (result.isDenied) {
-                    return  window.livewire.emit(event.eventMethod, event.eventMethodParams)
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        getValue(event.swalConfirmCancelledTitle, 'Cancelled'),
+                        getValue(event.swalConfirmCancelledText, 'Cancelled successfully!!'),
+                        'error'
+                    )
+
+                    if (event.eventMethodParams) {
+                        return  window.livewire.emit(event.eventCancelledMethod, event.eventCancelledMethodParams)
+                    }else {
+                        return  window.livewire.emit(event.eventCancelledMethod)
+                    }
                 }
-            });
+            })
+
         }else {
             Swal.fire({
                 icon              : getValue(event.icon, 'warning'),

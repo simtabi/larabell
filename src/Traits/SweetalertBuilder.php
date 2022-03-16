@@ -7,9 +7,14 @@ trait SweetalertBuilder
     public bool   $isSwalConfirmModal        = true; // trigger modal type, else confirm modal
     public string $swalConfirmedText         = 'Successfully confirmed!';
     public string $swalConfirmCancelledText  = 'Confirm action canceled!';
+    public string $swalConfirmedTitle        = 'Confirmed!';
+    public string $swalConfirmCancelledTitle = 'Canceled!';
 
     public string $swalEventMethod; // event method
     public array  $swalEventMethodParams; // event method params
+
+    public string $swalEventCancelledMethod; // cancelled event method
+    public array  $swalEventCancelledMethodParams; // cancelled event method params
 
     public string $swalIcon                   = 'warning'; // Type of toast icon
     public string $swalText                   = "Don't forget to star the repository if you like it."; // Text that is to be shown in the toast
@@ -99,6 +104,26 @@ trait SweetalertBuilder
     }
 
     /**
+     * @param string $swalConfirmedTitle
+     * @return self
+     */
+    public function setSwalConfirmedTitle(string $swalConfirmedTitle): self
+    {
+        $this->swalConfirmedTitle = $swalConfirmedTitle;
+        return $this;
+    }
+
+    /**
+     * @param string $swalConfirmCancelledTitle
+     * @return self
+     */
+    public function setSwalConfirmCancelledTitle(string $swalConfirmCancelledTitle): self
+    {
+        $this->swalConfirmCancelledTitle = $swalConfirmCancelledTitle;
+        return $this;
+    }
+
+    /**
      * @param string $swalEventMethod
      * @return self
      */
@@ -116,6 +141,29 @@ trait SweetalertBuilder
         $this->swalEventMethodParams = func_get_args();
         return $this;
     }
+
+    /**
+     * @param string $swalEventCancelledMethod
+     * @return self
+     */
+    public function setSwalEventCancelledMethod(string $swalEventCancelledMethod): self
+    {
+        $this->swalEventCancelledMethod = $swalEventCancelledMethod;
+        return $this;
+    }
+
+    /**
+     * @param array $swalEventCancelledMethodParams
+     * @return self
+     */
+    public function setSwalEventCancelledMethodParams(array $swalEventCancelledMethodParams): self
+    {
+        $this->swalEventCancelledMethodParams = $swalEventCancelledMethodParams;
+        return $this;
+    }
+
+
+
 
     /**
      * @param string|null $swalIcon
@@ -474,6 +522,22 @@ trait SweetalertBuilder
     /**
      * @return string
      */
+    public function getSwalConfirmedTitle(): string
+    {
+        return $this->swalConfirmedTitle;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSwalConfirmCancelledTitle(): string
+    {
+        return $this->swalConfirmCancelledTitle;
+    }
+
+    /**
+     * @return string
+     */
     public function getSwalEventMethod(): string
     {
         return $this->swalEventMethod;
@@ -485,6 +549,22 @@ trait SweetalertBuilder
     public function getSwalEventMethodParams(): array
     {
         return $this->swalEventMethodParams;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSwalEventCancelledMethod(): string
+    {
+        return $this->swalEventCancelledMethod;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSwalEventCancelledMethodParams(): array
+    {
+        return $this->swalEventCancelledMethodParams;
     }
 
     /**
@@ -759,65 +839,72 @@ trait SweetalertBuilder
     public function fireSwalNotification()
     {
         return $this->emit('larabellSwal:fire', [
-            'isConfirmModal'           => $this->isSwalConfirmModal,
-            'swalConfirmedText'        => $this->swalConfirmedText,
-            'swalConfirmCancelledText' => $this->swalConfirmCancelledText,
-            'eventMethod'              => $this->swalEventMethod,
-            'eventMethodParams'        => $this->swalEventMethodParams,
+            'isConfirmModal'              => $this->isSwalConfirmModal,
 
-            'icon'                     => $this->swalIcon,
-            'text'                     => $this->swalText,
-            'position'                 => $this->swalPosition,
+            'swalConfirmedText'           => $this->swalConfirmedText,
+            'swalConfirmCancelledText'    => $this->swalConfirmCancelledText,
+            'swalConfirmedTitle'          => $this->swalConfirmedTitle,
+            'swalConfirmCancelledTitle'   => $this->swalConfirmCancelledTitle,
+
+            'eventMethod'                 => $this->swalEventMethod,
+            'eventMethodParams'           => $this->swalEventMethodParams,
+
+            'eventCancelledMethod'        => $this->swalEventCancelledMethod,
+            'eventCancelledMethodParams'  => $this->swalEventCancelledMethodParams,
+
+            'icon'                        => $this->swalIcon,
+            'text'                        => $this->swalText,
+            'position'                    => $this->swalPosition,
 
             // defaults
-            'title'                    => $this->swalTitle,
-            'footer'                   => $this->swalFooter,
+            'title'                       => $this->swalTitle,
+            'footer'                      => $this->swalFooter,
 
             // with image
-            'imageUrl'                 => $this->swalImageUrl,
-            'imageAlt'                 => $this->swalImageAlt,
-            'imageHeight'              => $this->swalImageHeight,
-            'imageWidth'               => $this->swalImageWidth,
+            'imageUrl'                    => $this->swalImageUrl,
+            'imageAlt'                    => $this->swalImageAlt,
+            'imageHeight'                 => $this->swalImageHeight,
+            'imageWidth'                  => $this->swalImageWidth,
 
             // with html
-            'html'                     => $this->swalHtml,
-            'showCloseButton'          => $this->swalShowCloseButton,
-            'showCancelButton'         => $this->swalShowCancelButton,
-            'focusConfirm'             => $this->swalFocusConfirm,
-            'confirmButtonText'        => $this->swalConfirmButtonText,
-            'confirmButtonAriaLabel'   => $this->swalConfirmButtonAriaLabel,
-            'cancelButtonText'         => $this->swalCancelButtonText,
-            'cancelButtonAriaLabel'    => $this->swalCancelButtonAriaLabel,
+            'html'                        => $this->swalHtml,
+            'showCloseButton'             => $this->swalShowCloseButton,
+            'showCancelButton'            => $this->swalShowCancelButton,
+            'focusConfirm'                => $this->swalFocusConfirm,
+            'confirmButtonText'           => $this->swalConfirmButtonText,
+            'confirmButtonAriaLabel'      => $this->swalConfirmButtonAriaLabel,
+            'cancelButtonText'            => $this->swalCancelButtonText,
+            'cancelButtonAriaLabel'       => $this->swalCancelButtonAriaLabel,
 
             // dialog with 3 buttons
-            'showDenyButton'           => $this->swalShowDenyButton,
-            'denyButtonText'           => $this->swalDenyButtonText,
+            'showDenyButton'              => $this->swalShowDenyButton,
+            'denyButtonText'              => $this->swalDenyButtonText,
 
             // with custom position
-            'showConfirmButton'        => $this->swalShowConfirmButton,
-            'timer'                    => $this->swalTimer,
+            'showConfirmButton'           => $this->swalShowConfirmButton,
+            'timer'                       => $this->swalTimer,
 
             // with animate css
-            'showClass'                => $this->swalShowClass,
-            'hideClass'                => $this->swalHideClass,
+            'showClass'                   => $this->swalShowClass,
+            'hideClass'                   => $this->swalHideClass,
 
             // confirm dialog
-            'confirmButtonColor'       => $this->swalConfirmButtonColor,
-            'cancelButtonColor'        => $this->swalCancelButtonColor,
+            'confirmButtonColor'          => $this->swalConfirmButtonColor,
+            'cancelButtonColor'           => $this->swalCancelButtonColor,
 
             // custom width/padding
-            'width'                    => $this->swalWidth,
-            'padding'                  => $this->swalPadding,
-            'background'               => $this->swalBackground,
-            'backdrop'                 => $this->swalBackdrop,
+            'width'                       => $this->swalWidth,
+            'padding'                     => $this->swalPadding,
+            'background'                  => $this->swalBackground,
+            'backdrop'                    => $this->swalBackdrop,
 
             // autoclose timer
-            'timerProgressBar'         => $this->swalTimerProgressBar,
-            'didOpen'                  => $this->swalDidOpen,
-            'willClose'                => $this->swalWillClose,
+            'timerProgressBar'            => $this->swalTimerProgressBar,
+            'didOpen'                     => $this->swalDidOpen,
+            'willClose'                   => $this->swalWillClose,
 
             // with rtl
-            'iconHtml'                 => $this->swalIconHtml,
+            'iconHtml'                    => $this->swalIconHtml,
         ]);
     }
 }
