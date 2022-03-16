@@ -4,7 +4,7 @@ namespace Simtabi\Larabell\Traits;
 
 trait SweetalertBuilder
 {
-    public bool   $isSwalConfirmModal        = true; // trigger modal type, else confirm modal
+    public bool   $isSwalConfirmModal        = false; // trigger modal type, else confirm modal
     public string $swalConfirmedText         = 'Successfully confirmed!';
     public string $swalConfirmCancelledText  = 'Confirm action canceled!';
     public string $swalConfirmedTitle        = 'Confirmed!';
@@ -72,12 +72,11 @@ trait SweetalertBuilder
     public string  $swalIconHtml              = '؟';
 
     /**
-     * @param bool $status
      * @return self
      */
-    public function setIsSwalConfirmModal(bool $status): self
+    public function setIsSwalConfirmModal(): self
     {
-        $this->isSwalConfirmModal = $status;
+        $this->isSwalConfirmModal = true;
         return $this;
     }
 
