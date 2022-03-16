@@ -5,7 +5,6 @@ namespace Simtabi\Larabell\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Simtabi\Larabell\Commands\InstallCommand;
-use Simtabi\Larabell\Toast\ToastAlertsServiceProvider;
 
 class LarabellServiceProvider extends BaseServiceProvider
 {
