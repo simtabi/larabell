@@ -4,7 +4,7 @@ namespace Simtabi\Larabell\Toast\Traits;
 
 trait SweetalertBuilder
 {
-    public $swalIsModal                = true; // trigger modal type, else confirm modal
+    public $isSwalModal                = true; // trigger modal type, else confirm modal
     public $swalEventMethod; // event method
     public $swalEventMethodParams; // event method params
 
@@ -67,9 +67,9 @@ trait SweetalertBuilder
      * @param bool $status
      * @return self
      */
-    public function setSwalIsModal(bool $status): self
+    public function setIsSwalModal(bool $status): self
     {
-        $this->swalIsModal = $status;
+        $this->isSwalModal = $status;
         return $this;
     }
     /**
@@ -424,9 +424,9 @@ trait SweetalertBuilder
     /**
      * @return string|null
      */
-    public function isSwalIsModal(): bool
+    public function isIsSwalModal(): bool
     {
-        return $this->swalIsModal;
+        return $this->isSwalModal;
     }
 
     /**
@@ -718,7 +718,7 @@ trait SweetalertBuilder
     public function fireSweetalertModal()
     {
         return $this->emit('larabellSwal:fire', [
-            'isModal'                => $this->swalIsModal,
+            'isModal'                => $this->isSwalModal,
             'eventMethod'            => $this->swalEventMethod,
             'eventMethodParams'      => $this->swalEventMethodParams,
 
