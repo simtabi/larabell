@@ -4,72 +4,72 @@ namespace Simtabi\Larabell\Traits;
 
 trait SweetalertBuilder
 {
-    public bool   $isSwalConfirmModal        = false; // trigger modal type, else confirm modal
-    public string $swalConfirmedText         = 'Successfully confirmed!';
-    public string $swalConfirmCancelledText  = 'Confirm action canceled!';
-    public string $swalConfirmedTitle        = 'Confirmed!';
-    public string $swalConfirmCancelledTitle = 'Canceled!';
+    public bool   $isSwalConfirmModal              = false; // trigger modal type, else confirm modal
+    public string $swalConfirmedText               = 'Successfully confirmed!';
+    public string $swalConfirmCancelledText        = 'Confirm action canceled!';
+    public string $swalConfirmedTitle              = 'Confirmed!';
+    public string $swalConfirmCancelledTitle       = 'Canceled!';
 
-    public string $swalEventMethod; // event method
-    public array  $swalEventMethodParams; // event method params
+    public ?string $swalEventMethod                = null; // event method
+    public array   $swalEventMethodParams          = []; // event method params
 
-    public ?string $swalEventCancelledMethod      = null; // cancelled event method
-    public array  $swalEventCancelledMethodParams = []; // cancelled event method params
+    public ?string $swalEventCancelledMethod       = null; // cancelled event method
+    public array   $swalEventCancelledMethodParams = []; // cancelled event method params
 
-    public string $swalIcon                       = 'warning'; // Type of toast icon
-    public string $swalText                       = "Don't forget to star the repository if you like it."; // Text that is to be shown in the toast
-    public string $swalPosition                   = 'top-right'; // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+    public string $swalIcon                        = 'warning'; // Type of toast icon
+    public string $swalText                        = "Don't forget to star the repository if you like it."; // Text that is to be shown in the toast
+    public string $swalPosition                    = 'top-right'; // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
 
 
     // defaults
-    public string   $swalTitle                  = 'Oops...';
-    public string   $swalFooter                 = '<a href="">Why do I have this issue?</a>';
+    public string   $swalTitle                     = 'Oops...';
+    public string   $swalFooter                    = '<a href="">Why do I have this issue?</a>';
 
     // with image
-    public ?string  $swalImageUrl               = null;
-    public string   $swalImageAlt               = 'A swak image';
-    public int      $swalImageHeight            = 1500;
-    public int      $swalImageWidth             = 400;
+    public ?string  $swalImageUrl                  = null;
+    public string   $swalImageAlt                  = 'A swak image';
+    public int      $swalImageHeight               = 1500;
+    public int      $swalImageWidth                = 400;
 
     // with html
-    public string   $swalHtml                   = 'You can use <b>bold text</b>, <a href="//sweetalert2.github.io">links</a> and other HTML tags';
-    public bool     $swalShowCloseButton        = true;
-    public bool     $swalShowCancelButton       = true;
-    public bool     $swalFocusConfirm           = false;
-    public string   $swalConfirmButtonText      = '<i class="fa fa-thumbs-up"></i> Great!';
-    public string   $swalConfirmButtonAriaLabel = 'Thumbs up, great!';
-    public string   $swalCancelButtonText       = '<i class="fa fa-thumbs-down"></i>';
-    public string   $swalCancelButtonAriaLabel  = 'Thumbs down';
+    public string   $swalHtml                      = 'You can use <b>bold text</b>, <a href="//sweetalert2.github.io">links</a> and other HTML tags';
+    public bool     $swalShowCloseButton           = true;
+    public bool     $swalShowCancelButton          = true;
+    public bool     $swalFocusConfirm              = false;
+    public string   $swalConfirmButtonText         = '<i class="fa fa-thumbs-up"></i> Great!';
+    public string   $swalConfirmButtonAriaLabel    = 'Thumbs up, great!';
+    public string   $swalCancelButtonText          = '<i class="fa fa-thumbs-down"></i>';
+    public string   $swalCancelButtonAriaLabel     = 'Thumbs down';
 
     // dialog with 3 buttons
-    public bool     $swalShowDenyButton         = true;
-    public string   $swalDenyButtonText         = 'Don\'t save';
+    public bool     $swalShowDenyButton            = true;
+    public string   $swalDenyButtonText            = 'Don\'t save';
 
     // with custom position
-    public bool    $swalShowConfirmButton      = false;
-    public int     $swalTimer                  = 1500;
+    public bool    $swalShowConfirmButton          = false;
+    public int     $swalTimer                      = 1500;
 
     // with animate css
-    public string  $swalShowClass              = 'animate__animated animate__fadeInDown';
-    public string  $swalHideClass              = 'animate__animated animate__fadeOutUp';
+    public string  $swalShowClass                  = 'animate__animated animate__fadeInDown';
+    public string  $swalHideClass                  = 'animate__animated animate__fadeOutUp';
 
     // confirm dialog
-    public string  $swalConfirmButtonColor     = '#3085d6';
-    public string  $swalCancelButtonColor      = '#d33';
+    public string  $swalConfirmButtonColor         = '#3085d6';
+    public string  $swalCancelButtonColor          = '#d33';
 
     // custom width/padding
-    public int     $swalWidth                  = 600;
-    public string  $swalPadding                = '3em';
-    public string  $swalBackground             = '#fff';
-    public         $swalBackdrop               = null;
+    public int     $swalWidth                      = 600;
+    public string  $swalPadding                    = '3em';
+    public string  $swalBackground                 = '#fff';
+    public         $swalBackdrop                   = null;
 
     // autoclose timer
-    public bool    $swalTimerProgressBar      = true;
-    public ?string $swalDidOpen               = null; // call back
-    public ?string $swalWillClose             = null; // timer
+    public bool    $swalTimerProgressBar           = true;
+    public ?string $swalDidOpen                    = null; // call back
+    public ?string $swalWillClose                  = null; // timer
 
     // with rtl
-    public string  $swalIconHtml              = '؟';
+    public string  $swalIconHtml                   = '؟';
 
     /**
      * @return self
